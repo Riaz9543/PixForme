@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Tools</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Bootstrap Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-tools me-2"></i>Web Tools
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="Compressor.html">
+                            <i class="fas fa-compress-alt me-1"></i>Compressor
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="converter.html">
+                            <i class="fas fa-exchange-alt me-1"></i>Converter
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="font-converter.html">
+                            <i class="fas fa-font me-1"></i>Font Converter
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container my-5">
+        <h1 class="text-center mb-4">
+            <i class="fas fa-compress-alt me-2"></i>Image Compressor
+        </h1>
+        
+        <div class="drop-zone card border-dashed mb-4">
+            <div class="card-body text-center py-5">
+                <i class="fas fa-cloud-upload-alt fa-3x mb-3 text-primary"></i>
+                <h5>Drag & Drop Image</h5>
+                <p class="text-muted">or click to browse files</p>
+                <input type="file" id="fileInput" accept="image/*" class="d-none">
+            </div>
+        </div>
+
+        <div class="tool-card card mb-4">
+            <div class="card-body">
+                <div class="mb-3">
+                    <label for="quality" class="form-label">Compression Quality: <span id="qualityValue">80%</span></label>
+                    <input type="range" class="form-range" id="quality" min="1" max="100" value="80">
+                </div>
+                <div id="fileSizeInfo" class="text-center mb-3">Original: 0 KB | Reduced: 0 KB (0% smaller)</div>
+                <button id="compressBtn" class="btn btn-primary w-100">
+                    <i class="fas fa-compress-alt me-2"></i>Compress
+                </button>
+            </div>
+        </div>
+
+        <div class="preview-area">
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Original (<span id="originalSize">0 KB</span>)</h5>
+                            <img id="originalPreview" class="img-fluid rounded mt-3">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Compressed (<span id="compressedSize">0 KB</span>)</h5>
+                            <img id="compressedPreview" class="img-fluid rounded mt-3">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center">
+                <a id="downloadBtn" download class="btn btn-success download-btn">
+                    <i class="fas fa-download me-2"></i>Download Compressed Image
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="script-compress.js"></script>
+</body>
+</html>

@@ -1,0 +1,181 @@
+:root {
+    --primary: #6c5ce7;
+    --primary-dark: #5649d1;
+    --secondary: #a29bfe;
+    --dark: #2d3436;
+    --light: #f5f6fa;
+    --success: #00b894;
+    --success-dark: #00a884;
+    --warning: #fdcb6e;
+    --danger: #d63031;
+    --info: #0984e3;
+    --border-radius: 0.5rem;
+}
+
+body {
+    background-color: #f8f9fa;
+    color: var(--dark);
+    min-height: 100vh;
+}
+
+/* Navbar customization */
+.navbar {
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.navbar-brand {
+    font-weight: 600;
+}
+
+/* Drop zone styles */
+.drop-zone {
+    border: 2px dashed var(--secondary);
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.drop-zone:hover {
+    background-color: rgba(108, 92, 231, 0.05);
+    border-color: var(--primary);
+}
+
+.border-dashed {
+    border-style: dashed;
+}
+
+/* Tool card styles */
+.tool-card {
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    border: none;
+}
+
+/* Button styles */
+.btn-primary {
+    background-color: var(--primary);
+    border-color: var(--primary);
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-dark);
+    border-color: var(--primary-dark);
+}
+
+.btn-success {
+    background-color: var(--success);
+    border-color: var(--success);
+}
+
+.btn-success:hover {
+    background-color: var(--success-dark);
+    border-color: var(--success-dark);
+}
+
+/* Form elements */
+.form-range::-webkit-slider-thumb {
+    background: var(--primary);
+}
+
+.form-range::-moz-range-thumb {
+    background: var(--primary);
+}
+
+.form-select:focus, .form-range:focus {
+    border-color: var(--secondary);
+    box-shadow: 0 0 0 0.25rem rgba(108, 92, 231, 0.25);
+}
+
+/* Preview area */
+.preview-area img {
+    max-height: 400px;
+    object-fit: contain;
+}
+
+.download-btn {
+    display: none;
+    max-width: 400px;
+    margin: 0 auto;
+    transition: transform 0.2s ease;
+}
+
+.download-btn:hover {
+    transform: translateY(-2px);
+}
+
+/* Font preview styles */
+.font-preview {
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+}
+
+.sample-text {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .preview-area img {
+        max-height: 300px;
+    }
+    
+    .sample-text {
+        font-size: 1rem;
+    }
+}
+
+/* Animation for file drop */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+    100% { transform: scale(1); }
+}
+
+.drop-zone.active-drop {
+    animation: pulse 1.5s infinite;
+    background-color: rgba(108, 92, 231, 0.1);
+    border-color: var(--primary);
+}
+/* Add these to your existing style.css or audio_style.css */
+.video-to-audio-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.video-preview {
+    max-width: 100%;
+    margin-bottom: 20px;
+    display: none;
+}
+
+#conversionProgress {
+    margin-top: 15px;
+    height: 8px;
+}
+
+.progress-bar {
+    background-color: var(--primary);
+    transition: width 0.3s ease;
+}
+
+/* Add to your existing media queries */
+@media (max-width: 576px) {
+    .format-selector {
+        flex-direction: column;
+    }
+    
+    .format-selector select {
+        width: 100%;
+        margin-top: 10px;
+    }
+}
+.icon-bg {
+    background-color: #4f46e5;  /* Indigo */
+    color: white;               /* Icon color */
+    padding: 8px;
+    border-radius: 50%;         /* Makes it round */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    font-size: 16px;
+}
