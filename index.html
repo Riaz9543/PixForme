@@ -27,11 +27,16 @@
     <meta name="twitter:description" content="Resize, crop, convert, and optimize your images online. Free, private, and fast." />
     <meta name="twitter:image" content="https://www.pixforme.online/og-image.png" />
 
+    <!-- ========== PWA ========== -->
+    <meta name="theme-color" content="#5b8af5" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="PixForMe" />
+    <link rel="manifest" id="pwaManifest" href="" />
+
     <!-- ========== FAVICON — Multi‑format fallback ========== -->
-<!-- ========== NEW GOOGLE-FRIENDLY FAVICONS ========== -->
-<link rel="icon" type="image/png" sizes="32x32" href="https://www.pixforme.online/favicon-32x32.png" />
-<link rel="icon" type="image/x-icon" href="https://www.pixforme.online/favicon.ico" />
-<link rel="apple-touch-icon" sizes="180x180" href="https://www.pixforme.online/apple-touch-icon-180x180.png" />
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%235b8af5'/%3E%3Ctext x='50' y='68' font-size='52' font-family='Arial, sans-serif' font-weight='700' text-anchor='middle' fill='white'%3EP%3C/text%3E%3C/svg%3E" />
     <link rel="alternate icon" type="image/png" sizes="32x32" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAQ9JREFUWIXt1jFKxEAUxvHf2VgiFloIYSFYqrFQwUawtLK1EEQExc7O0k6w8gH2XiC7B7CyFGy8iIUoCmJhIZvJm00m2c2G3bA72fxmHjPvzQz5HxoK8KM7HrDDQ2UJHEuPpwUQj90BIiD/GLAUAoCgKLD/KwA2m+UgKCt1K3wB6/UASWr8zAULgAXAAmABsABYACwAFgALgAXAAtACpGkKKB14M7zyufJgs9mCy0h7A4QQsC7rZim4Jk4tIHiOOYSc4yrgLIS4CB2QeZ7YbDZlF5A48uMPEXXuO2cqFbTOjVay02k5wD3nzhxzryGfJjcYB4kTR49zJuy8eywfiJBjfz7eH0N3jYxT/h4F+E+9AQ1rJ+3yDRCUAAAAAElFTkSuQmCC" />
     <link rel="apple-touch-icon" sizes="180x180" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAYAAAA9zQYyAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAIFSURBVHic7d1NjtNQEMfxX2bYwQoJWCBxRSBxBnKGkRBYk04GjTgK4gJxCYRgAcjeM5zj5jl+69h9Pj8p3b6vS9W6yBk9AQB2J1HHLz+/vsfT8zM+Pj7+/IcrraY6RgBzPQ1iYzmdTvj5+PjzH/5M1TEAmOs8iI3len3B58dH/kdDVTcA5vqTxZ4Pny9E/gOqrgDM9S2LjS0RRd2h6g7AXF2cdrEEIuoOVXcA5uq6c+JE1B2q7gDM1cVpF0skou5QdQdgrq47TyKibqHqFsBcXZx2sUQi6g5VdwDm6rrSXSyZiLpD1S2AubpDl7Rj9bu5RNQdqm4BzNUVp10skYi6Q9UtgLm6Q9dP1e/mElF3qLoFMFe3ccnEFiSi7lB1C2Cu7tD1kzR1P3R9iag7VN0CmKub2OKo+6HrS0TdoeoWwFzdxiW+VD9xfYmoO1TdApiru3TF0y/XT1xfIuoOVbcA5uomrjj16/UjIlI/D8e/1eq7w12+nH//+fnXl76KKLvcf/c/fP1w5PnrAADYHIk4nk4nHLu/bubDk99+/vj6Lys4UgqK++seLQbL45ziLhZnTqIh9wCw7C5K/2sT7wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA3H0DE9gNX8jKhGkAAAAASUVORK5CYII=" />
 
@@ -76,6 +81,8 @@
             --transition: 0.2s ease;
             --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
             --shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+            --grad: linear-gradient(135deg, #5b8af5 0%, #8b6bf0 55%, #c65bd6 100%);
+            --grad-soft: linear-gradient(135deg, rgba(91,138,245,0.16) 0%, rgba(139,107,240,0.16) 55%, rgba(198,91,214,0.16) 100%);
         }
 
         [data-theme="dark"] {
@@ -139,6 +146,50 @@
             flex-direction: column;
             transition: background 0.3s, color 0.3s;
             -webkit-font-smoothing: antialiased;
+            position: relative;
+            overflow-x: hidden;
+        }
+        .bg-orbs {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            overflow: hidden;
+            pointer-events: none;
+        }
+        .bg-orbs::before,
+        .bg-orbs::after {
+            content: '';
+            position: absolute;
+            width: 42vw;
+            height: 42vw;
+            max-width: 560px;
+            max-height: 560px;
+            border-radius: 50%;
+            filter: blur(90px);
+            opacity: 0.16;
+            animation: orbFloat 22s ease-in-out infinite alternate;
+        }
+        .bg-orbs::before {
+            background: #5b8af5;
+            top: -14%;
+            left: -10%;
+        }
+        .bg-orbs::after {
+            background: #c65bd6;
+            bottom: -16%;
+            right: -8%;
+            animation-delay: -9s;
+        }
+        [data-theme="light"] .bg-orbs::before,
+        [data-theme="light"] .bg-orbs::after {
+            opacity: 0.14;
+        }
+        @keyframes orbFloat {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(4%, 6%) scale(1.12); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .bg-orbs::before, .bg-orbs::after { animation: none; }
         }
 
         ::-webkit-scrollbar {
@@ -166,7 +217,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 1rem;
+            gap: 0.6rem;
             position: sticky;
             top: 0;
             z-index: 100;
@@ -177,21 +228,44 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            font-size: 1.15rem;
-            font-weight: 700;
-            letter-spacing: -0.3px;
+            font-size: 1.2rem;
+            font-weight: 800;
+            letter-spacing: -0.4px;
             color: var(--text);
             text-decoration: none;
+        }
+        .logo .logo-text {
+            background: var(--grad);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
         .logo i {
             color: var(--accent);
             font-size: 1.25rem;
+            background: var(--grad);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .beta-pill {
+            font-size: 0.6rem;
+            font-weight: 700;
+            letter-spacing: 0.4px;
+            padding: 0.12rem 0.45rem;
+            border-radius: 20px;
+            background: var(--grad-soft);
+            color: var(--accent);
+            text-transform: uppercase;
+            margin-left: 0.15rem;
         }
         .header-actions {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.4rem;
+            flex-shrink: 0;
         }
+        .install-btn-text { display: inline; }
         .theme-toggle {
             width: 38px;
             height: 38px;
@@ -233,12 +307,13 @@
             letter-spacing: -0.1px;
         }
         .btn-primary {
-            background: var(--accent);
+            background: var(--grad);
             color: #fff;
         }
         .btn-primary:hover {
-            background: var(--accent-hover);
-            box-shadow: 0 2px 12px rgba(74, 116, 232, 0.25);
+            filter: brightness(1.08);
+            box-shadow: 0 4px 18px rgba(120, 100, 240, 0.32);
+            transform: translateY(-1px);
         }
         .btn-outline {
             background: transparent;
@@ -819,6 +894,349 @@
         }
 
         /* ============================================================
+                   MODE TABS
+                   ============================================================ */
+        .mode-tabs {
+            display: flex;
+            gap: 0.4rem;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 0.3rem;
+            border-radius: 40px;
+            width: fit-content;
+            margin-bottom: 0.15rem;
+        }
+        .mode-tab {
+            border: none;
+            background: transparent;
+            color: var(--text2);
+            font-family: var(--font);
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 0.45rem 1rem;
+            border-radius: 30px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: all var(--transition);
+        }
+        .mode-tab:hover {
+            color: var(--text);
+        }
+        .mode-tab.active {
+            background: var(--grad);
+            color: #fff;
+            box-shadow: 0 2px 10px rgba(120, 100, 240, 0.28);
+        }
+
+        /* ============================================================
+                   COMPRESSION PREVIEW
+                   ============================================================ */
+        .compare-box {
+            margin-top: 0.5rem;
+        }
+        .compare-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.68rem;
+            color: var(--text3);
+            margin-bottom: 0.3rem;
+        }
+        .compare-row .cval {
+            font-weight: 700;
+        }
+        .compare-row .orig-val { color: var(--text2); }
+        .compare-row .new-val { color: var(--success); }
+        .compare-track {
+            position: relative;
+            height: 8px;
+            border-radius: 6px;
+            background: var(--surface3);
+            overflow: hidden;
+        }
+        .compare-fill {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            border-radius: 6px;
+            background: var(--grad);
+            width: 0%;
+            transition: width 0.35s ease;
+        }
+        .compare-savings {
+            text-align: center;
+            font-size: 0.68rem;
+            color: var(--success);
+            font-weight: 700;
+            margin-top: 0.35rem;
+        }
+
+        /* ============================================================
+                   ADJUSTMENTS / FILTERS
+                   ============================================================ */
+        .adj-row {
+            display: flex;
+            align-items: center;
+            gap: 0.55rem;
+            margin-bottom: 0.5rem;
+        }
+        .adj-row label {
+            font-size: 0.7rem;
+            color: var(--text2);
+            width: 68px;
+            flex-shrink: 0;
+        }
+        .adj-row input[type="range"] {
+            flex: 1;
+            accent-color: var(--accent);
+            height: 4px;
+        }
+        .adj-row .adj-val {
+            font-size: 0.68rem;
+            color: var(--accent);
+            font-weight: 600;
+            width: 34px;
+            text-align: right;
+            flex-shrink: 0;
+        }
+        .transform-row {
+            display: flex;
+            gap: 0.35rem;
+            margin-top: 0.4rem;
+        }
+        .transform-row .btn {
+            flex: 1;
+            padding: 0.4rem;
+            font-size: 0.72rem;
+        }
+
+        /* ============================================================
+                   WATERMARK / TEXT OVERLAY
+                   ============================================================ */
+        .wm-input {
+            width: 100%;
+            padding: 0.45rem 0.6rem;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            color: var(--text);
+            font-size: 0.8rem;
+            font-family: var(--font);
+            margin-bottom: 0.5rem;
+        }
+        .wm-row {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+        .wm-row input[type="color"] {
+            width: 32px;
+            height: 32px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            background: none;
+            cursor: pointer;
+            padding: 2px;
+            flex-shrink: 0;
+        }
+        .wm-row input[type="range"] {
+            flex: 1;
+            accent-color: var(--accent);
+        }
+        .wm-pos-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.3rem;
+            margin-bottom: 0.5rem;
+        }
+        .wm-pos-btn {
+            aspect-ratio: 1;
+            border: 1px solid var(--border);
+            background: var(--surface2);
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all var(--transition);
+        }
+        .wm-pos-btn::after {
+            content: '';
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--text3);
+        }
+        .wm-pos-btn:hover { border-color: var(--accent); }
+        .wm-pos-btn.active {
+            border-color: var(--accent);
+            background: var(--accent-muted);
+        }
+        .wm-pos-btn.active::after { background: var(--accent); }
+
+        /* ============================================================
+                   BATCH MODE
+                   ============================================================ */
+        .batch-dropzone {
+            border: 2px dashed var(--border);
+            border-radius: var(--radius-lg);
+            padding: 2rem 1.5rem;
+            text-align: center;
+            cursor: pointer;
+            background: var(--surface);
+            transition: all var(--transition);
+        }
+        .batch-dropzone:hover, .batch-dropzone.dragover {
+            border-color: var(--accent);
+            background: var(--accent-muted);
+        }
+        .batch-dropzone i {
+            font-size: 1.8rem;
+            color: var(--text3);
+            margin-bottom: 0.4rem;
+            display: block;
+        }
+        .batch-dropzone h3 { font-size: 0.95rem; font-weight: 600; }
+        .batch-dropzone p { color: var(--text2); font-size: 0.78rem; margin-top: 0.2rem; }
+
+        .batch-toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 0.5rem;
+            margin: 0.75rem 0;
+            flex-wrap: wrap;
+        }
+        .batch-toolbar .count {
+            font-size: 0.78rem;
+            color: var(--text2);
+            font-weight: 600;
+        }
+        .batch-actions { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+
+        .batch-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 0.65rem;
+        }
+        .batch-item {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 0.55rem;
+            cursor: grab;
+            transition: all var(--transition), transform 0.15s ease;
+            position: relative;
+        }
+        .batch-item.dragging {
+            opacity: 0.4;
+            transform: scale(0.97);
+        }
+        .batch-item.drag-over {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 2px var(--accent-muted);
+        }
+        .batch-item .drag-handle {
+            position: absolute;
+            top: 0.4rem;
+            left: 0.4rem;
+            font-size: 0.65rem;
+            color: var(--text3);
+            background: var(--surface2);
+            padding: 0.1rem 0.3rem;
+            border-radius: 4px;
+        }
+        .batch-item .thumb {
+            width: 100%;
+            aspect-ratio: 1;
+            object-fit: cover;
+            border-radius: 6px;
+            background: var(--canvas-bg);
+            display: block;
+            margin-bottom: 0.4rem;
+        }
+        .batch-item .bname {
+            font-size: 0.7rem;
+            font-weight: 500;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .batch-item .bmeta {
+            font-size: 0.62rem;
+            color: var(--text3);
+            margin-top: 0.1rem;
+        }
+        .batch-item .bmeta.done { color: var(--success); font-weight: 600; }
+        .batch-item .reorder-btns {
+            display: none;
+            gap: 0.3rem;
+            margin-top: 0.35rem;
+        }
+        .batch-item .reorder-btns button {
+            flex: 1;
+            border: 1px solid var(--border);
+            background: var(--surface2);
+            color: var(--text2);
+            border-radius: 6px;
+            padding: 0.25rem;
+            font-size: 0.7rem;
+            cursor: pointer;
+        }
+        .batch-item .reorder-btns button:disabled {
+            opacity: 0.3;
+            pointer-events: none;
+        }
+        .batch-item .bremove {
+            position: absolute;
+            top: 0.4rem;
+            right: 0.4rem;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: none;
+            background: var(--danger-muted);
+            color: var(--danger);
+            font-size: 0.65rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .batch-progress {
+            margin-top: 0.75rem;
+            display: none;
+        }
+        .batch-progress.active { display: block; }
+        .batch-progress-track {
+            height: 6px;
+            border-radius: 6px;
+            background: var(--surface3);
+            overflow: hidden;
+        }
+        .batch-progress-fill {
+            height: 100%;
+            width: 0%;
+            background: var(--grad);
+            transition: width 0.25s ease;
+        }
+        .batch-progress-label {
+            font-size: 0.68rem;
+            color: var(--text2);
+            margin-top: 0.3rem;
+            text-align: center;
+        }
+        .batch-empty {
+            text-align: center;
+            color: var(--text3);
+            font-size: 0.8rem;
+            padding: 2rem 0;
+        }
+
+        /* ============================================================
                    RESPONSIVE
                    ============================================================ */
         @media (max-width: 1024px) {
@@ -845,50 +1263,195 @@
                 min-height: 260px;
             }
         }
+        @media (max-width: 760px) {
+            [style*="max-width:1500px;margin:1.1rem"] {
+                padding: 0 0.75rem !important;
+                margin-top: 0.75rem !important;
+            }
+            .mode-tabs {
+                width: 100%;
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 0.25rem;
+                padding: 0.25rem;
+            }
+            .mode-tab {
+                justify-content: center;
+                padding: 0.55rem 0.4rem;
+                font-size: 0.76rem;
+                white-space: nowrap;
+            }
+        }
         @media (max-width: 640px) {
             html {
                 font-size: 14px;
             }
             header {
-                padding: 0.5rem 0.75rem;
+                padding: 0.55rem 0.65rem;
             }
             .logo {
-                font-size: 1rem;
+                font-size: 0.95rem;
+                gap: 0.35rem;
+            }
+            .beta-pill {
+                display: none;
+            }
+            .install-btn-text {
+                display: none;
+            }
+            #installBtn {
+                padding: 0.5rem 0.65rem;
+            }
+            .theme-toggle {
+                width: 34px;
+                height: 34px;
             }
             .app-main {
-                padding: 0.5rem;
-                gap: 0.5rem;
+                padding: 0.6rem;
+                gap: 0.6rem;
             }
             .tools-panel .tool-card {
                 min-width: 100%;
+                padding: 0.85rem;
             }
             .ratio-grid {
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: repeat(3, 1fr);
+            }
+            .canvas-wrapper {
+                padding: 0.5rem;
+                min-height: unset;
             }
             .canvas-container {
-                min-height: 200px;
+                min-height: 180px;
+            }
+            .canvas-container canvas {
+                max-height: 46vh;
             }
             .upload-zone {
-                min-height: 200px;
+                min-height: 220px;
                 padding: 2rem 1rem;
+            }
+            .file-meta {
+                font-size: 0.68rem;
+                gap: 0.3rem 0.6rem;
+            }
+            /* Larger touch targets */
+            .crop-handle {
+                width: 22px;
+                height: 22px;
+            }
+            .crop-handle.nw { top: -11px; left: -11px; }
+            .crop-handle.ne { top: -11px; right: -11px; }
+            .crop-handle.sw { bottom: -11px; left: -11px; }
+            .crop-handle.se { bottom: -11px; right: -11px; }
+            .wm-pos-btn {
+                min-height: 38px;
+            }
+            .toggle-switch {
+                width: 38px;
+                height: 22px;
+            }
+            .toggle-switch::after {
+                width: 16px;
+                height: 16px;
+            }
+            .toggle-switch.active::after {
+                transform: translateX(16px);
+            }
+            .btn {
+                min-height: 40px;
+            }
+            .btn-xs, .btn-sm {
+                min-height: 34px;
+            }
+            .size-row, .wm-row, .adj-row {
+                flex-wrap: nowrap;
+            }
+            .adj-row label {
+                width: 58px;
+                font-size: 0.66rem;
+            }
+            /* Batch mode mobile */
+            .batch-dropzone {
+                padding: 1.5rem 1rem;
+            }
+            .batch-toolbar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .batch-actions {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 0.4rem;
+            }
+            .batch-actions .btn {
+                width: 100%;
+            }
+            .batch-list {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.5rem;
+            }
+            .batch-item {
+                padding: 0.45rem;
+            }
+            .batch-item .drag-handle {
+                display: none;
+            }
+            .batch-item .bremove {
+                width: 26px;
+                height: 26px;
+            }
+            .batch-item .reorder-btns {
+                display: flex;
+            }
+            .toast-container {
+                left: 0.75rem;
+                right: 0.75rem;
+                bottom: 1rem;
+            }
+            .toast {
+                width: 100%;
+            }
+        }
+        @media (max-width: 380px) {
+            .batch-list {
+                grid-template-columns: 1fr 1fr;
+            }
+            .mode-tab span.tab-label {
+                display: none;
+            }
+        }
+        @media (pointer: coarse) {
+            .btn, .ratio-btn, .wm-pos-btn, .theme-toggle {
+                min-height: 40px;
             }
         }
     </style>
 </head>
 <body>
+    <div class="bg-orbs" aria-hidden="true"></div>
 
     <!-- ========== HEADER ========== -->
     <header>
-        <a href="/" class="logo"><i class="fas fa-image"></i> PixForMe</a>
+        <a href="/" class="logo"><i class="fas fa-image"></i> <span class="logo-text">PixForMe</span><span class="beta-pill">Pro</span></a>
         <div class="header-actions">
+            <button class="btn btn-outline btn-sm hidden" id="installBtn" onclick="installPwa()"><i class="fas fa-download"></i> <span class="install-btn-text">Install App</span></button>
             <button class="theme-toggle" id="themeToggle" title="Toggle theme" onclick="toggleTheme()">
                 <i class="fas fa-moon" id="themeIcon"></i>
             </button>
         </div>
     </header>
 
-    <!-- ========== MAIN ========== -->
-    <div class="app-main">
+    <!-- ========== MODE TABS ========== -->
+    <div style="max-width:1500px;margin:1.1rem auto 0;width:100%;padding:0 1.25rem;">
+        <div class="mode-tabs">
+            <button class="mode-tab active" id="tabSingle" onclick="switchMode('single')"><i class="fas fa-image"></i> <span class="tab-label">Single Edit</span></button>
+            <button class="mode-tab" id="tabBatch" onclick="switchMode('batch')"><i class="fas fa-layer-group"></i> <span class="tab-label">Batch Process</span></button>
+        </div>
+    </div>
+
+    <!-- ========== MAIN: SINGLE EDIT ========== -->
+    <div class="app-main" id="singleMode">
         <!-- Canvas Area -->
         <div class="canvas-area">
             <div class="upload-zone" id="uploadZone" onclick="document.getElementById('fileInput').click()">
@@ -951,6 +1514,66 @@
                 <p style="font-size:0.63rem;color:var(--text3);margin-top:0.35rem;">Drag the box or resize from corners.</p>
             </div>
 
+            <!-- Adjustments -->
+            <div class="tool-card">
+                <div class="card-label"><i class="fas fa-sliders-h"></i> Adjustments</div>
+                <div class="adj-row">
+                    <label>Brightness</label>
+                    <input type="range" id="adjBrightness" min="50" max="150" value="100" />
+                    <span class="adj-val" id="adjBrightnessVal">100%</span>
+                </div>
+                <div class="adj-row">
+                    <label>Contrast</label>
+                    <input type="range" id="adjContrast" min="50" max="150" value="100" />
+                    <span class="adj-val" id="adjContrastVal">100%</span>
+                </div>
+                <div class="adj-row">
+                    <label>Saturation</label>
+                    <input type="range" id="adjSaturation" min="0" max="200" value="100" />
+                    <span class="adj-val" id="adjSaturationVal">100%</span>
+                </div>
+                <div class="transform-row">
+                    <button class="btn btn-outline" onclick="rotateCanvas(-90)" title="Rotate left"><i class="fas fa-undo"></i></button>
+                    <button class="btn btn-outline" onclick="rotateCanvas(90)" title="Rotate right"><i class="fas fa-redo"></i></button>
+                    <button class="btn btn-outline" onclick="flipCanvas('h')" title="Flip horizontal"><i class="fas fa-arrows-alt-h"></i></button>
+                    <button class="btn btn-outline" onclick="flipCanvas('v')" title="Flip vertical"><i class="fas fa-arrows-alt-v"></i></button>
+                </div>
+                <div class="tool-actions">
+                    <div class="row-split">
+                        <button class="btn btn-primary btn-sm" onclick="applyAdjustments()"><i class="fas fa-check"></i> Apply</button>
+                        <button class="btn btn-outline btn-sm" onclick="resetAdjustments()"><i class="fas fa-undo-alt"></i> Reset</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Watermark / Text Overlay -->
+            <div class="tool-card">
+                <div class="card-label"><i class="fas fa-stamp"></i> Watermark / Text</div>
+                <input type="text" class="wm-input" id="wmText" placeholder="Your watermark text…" maxlength="60" />
+                <div class="wm-row">
+                    <input type="color" id="wmColor" value="#ffffff" />
+                    <input type="range" id="wmOpacity" min="10" max="100" value="70" />
+                    <span class="adj-val" id="wmOpacityVal">70%</span>
+                </div>
+                <div class="wm-row">
+                    <label style="font-size:0.68rem;color:var(--text3);width:52px;flex-shrink:0;">Size</label>
+                    <input type="range" id="wmSize" min="10" max="120" value="28" />
+                    <span class="adj-val" id="wmSizeVal">28px</span>
+                </div>
+                <div class="wm-pos-grid" id="wmPosGrid">
+                    <button class="wm-pos-btn" data-pos="nw"></button>
+                    <button class="wm-pos-btn" data-pos="n"></button>
+                    <button class="wm-pos-btn" data-pos="ne"></button>
+                    <button class="wm-pos-btn" data-pos="w"></button>
+                    <button class="wm-pos-btn active" data-pos="center"></button>
+                    <button class="wm-pos-btn" data-pos="e"></button>
+                    <button class="wm-pos-btn" data-pos="sw"></button>
+                    <button class="wm-pos-btn" data-pos="s"></button>
+                    <button class="wm-pos-btn" data-pos="se"></button>
+                </div>
+                <button class="btn btn-primary w-full btn-sm" onclick="applyWatermark()"><i class="fas fa-stamp"></i> Stamp onto Image</button>
+            </div>
+
             <!-- Output / Converter -->
             <div class="tool-card">
                 <div class="card-label"><i class="fas fa-file-export"></i> Output</div>
@@ -970,6 +1593,14 @@
                     <input type="number" id="targetSizeKB" placeholder="KB" min="1" step="1" />
                     <button class="btn btn-outline btn-xs" onclick="optimizeForTarget()">Optimize</button>
                     <span class="est-size" id="estimatedSize">Est. — KB</span>
+                </div>
+                <div class="compare-box">
+                    <div class="compare-row">
+                        <span>Original <span class="cval orig-val" id="cmpOrig">—</span></span>
+                        <span>New <span class="cval new-val" id="cmpNew">—</span></span>
+                    </div>
+                    <div class="compare-track"><div class="compare-fill" id="cmpFill"></div></div>
+                    <div class="compare-savings" id="cmpSavings"></div>
                 </div>
                 <div class="tool-actions">
                     <button class="btn btn-success" onclick="convertAndDownload()"><i class="fas fa-download"></i> Download</button>
@@ -993,8 +1624,106 @@
         </div>
     </div>
 
+    <!-- ========== MAIN: BATCH MODE ========== -->
+    <div class="app-main hidden" id="batchMode" style="max-width:1500px;">
+        <div class="canvas-area">
+            <div class="batch-dropzone" id="batchDropzone" onclick="document.getElementById('batchFileInput').click()">
+                <i class="fas fa-layer-group"></i>
+                <h3>Drop multiple images here</h3>
+                <p>or click to browse — process, filter, watermark & convert them all at once</p>
+            </div>
+            <input type="file" id="batchFileInput" accept="image/*" multiple style="display:none;" onchange="handleBatchFileSelect(event)" />
+
+            <div class="batch-toolbar">
+                <span class="count" id="batchCount">0 images queued</span>
+                <div class="batch-actions">
+                    <button class="btn btn-outline btn-sm" onclick="clearBatch()"><i class="fas fa-trash"></i> Clear</button>
+                    <button class="btn btn-primary btn-sm" onclick="processBatch()"><i class="fas fa-cogs"></i> Process All</button>
+                    <button class="btn btn-success btn-sm" onclick="downloadBatchZip()" id="batchDownloadBtn" disabled><i class="fas fa-file-archive"></i> Download ZIP</button>
+                </div>
+            </div>
+
+            <div class="batch-progress" id="batchProgress">
+                <div class="batch-progress-track"><div class="batch-progress-fill" id="batchProgressFill"></div></div>
+                <div class="batch-progress-label" id="batchProgressLabel">Processing…</div>
+            </div>
+
+            <div class="batch-list" id="batchList">
+                <div class="batch-empty">No images queued yet — add a few to get started. Drag cards to reorder.</div>
+            </div>
+        </div>
+
+        <!-- Batch Settings Panel -->
+        <div class="tools-panel">
+            <div class="tool-card">
+                <div class="card-label"><i class="fas fa-expand-arrows-alt"></i> Resize (applies to all)</div>
+                <div class="size-row">
+                    <div class="field"><label>Max Width</label><input type="number" id="batchWidth" min="1" max="10000" value="1600" /></div>
+                    <div class="field"><label>Max Height</label><input type="number" id="batchHeight" min="1" max="10000" value="1600" /></div>
+                </div>
+                <p style="font-size:0.63rem;color:var(--text3);margin-top:0.35rem;">Images are scaled down to fit within these bounds — aspect ratio is always kept.</p>
+            </div>
+
+            <div class="tool-card">
+                <div class="card-label"><i class="fas fa-sliders-h"></i> Adjustments (applies to all)</div>
+                <div class="lock-row" style="margin-top:0;">
+                    <div class="toggle-switch" id="batchAdjToggle" onclick="toggleBatchAdjustments()"></div>
+                    <span class="lock-label">Use Single-Edit adjustments</span>
+                </div>
+                <p style="font-size:0.63rem;color:var(--text3);margin-top:0.4rem;">Set brightness / contrast / saturation on the Single Edit tab first, then toggle this on.</p>
+            </div>
+
+            <div class="tool-card">
+                <div class="card-label"><i class="fas fa-stamp"></i> Watermark (applies to all)</div>
+                <input type="text" class="wm-input" id="batchWmText" placeholder="Optional watermark text…" maxlength="60" />
+                <div class="wm-row">
+                    <input type="color" id="batchWmColor" value="#ffffff" />
+                    <input type="range" id="batchWmOpacity" min="10" max="100" value="70" />
+                    <span class="adj-val" id="batchWmOpacityVal">70%</span>
+                </div>
+                <div class="wm-pos-grid" id="batchWmPosGrid">
+                    <button class="wm-pos-btn" data-pos="nw"></button>
+                    <button class="wm-pos-btn" data-pos="n"></button>
+                    <button class="wm-pos-btn" data-pos="ne"></button>
+                    <button class="wm-pos-btn" data-pos="w"></button>
+                    <button class="wm-pos-btn" data-pos="center"></button>
+                    <button class="wm-pos-btn" data-pos="e"></button>
+                    <button class="wm-pos-btn" data-pos="sw"></button>
+                    <button class="wm-pos-btn" data-pos="s"></button>
+                    <button class="wm-pos-btn active" data-pos="se"></button>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <div class="card-label"><i class="fas fa-file-export"></i> Output</div>
+                <select class="format-select" id="batchFormatSelect">
+                    <option value="image/jpeg" selected>JPEG (compressed)</option>
+                    <option value="image/png">PNG (lossless)</option>
+                    <option value="image/webp">WebP (modern)</option>
+                    <option value="image/bmp">BMP (uncompressed)</option>
+                </select>
+                <div class="quality-row">
+                    <span class="q-label">Quality</span>
+                    <input type="range" id="batchQualitySlider" min="10" max="100" value="85" />
+                    <span class="q-val" id="batchQualityValue">85%</span>
+                </div>
+                <div class="compare-box" id="batchCompareBox" style="display:none;">
+                    <div class="compare-row">
+                        <span>Total original <span class="cval orig-val" id="batchCmpOrig">—</span></span>
+                        <span>Total new <span class="cval new-val" id="batchCmpNew">—</span></span>
+                    </div>
+                    <div class="compare-track"><div class="compare-fill" id="batchCmpFill"></div></div>
+                    <div class="compare-savings" id="batchCmpSavings"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- ========== TOAST CONTAINER ========== -->
     <div class="toast-container" id="toastContainer"></div>
+
+    <!-- JSZip — used for "Download All as ZIP" in Batch mode -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 
     <!-- ========== APP LOGIC ========== -->
     <script>
@@ -1016,6 +1745,15 @@
             let cropDragOffset = { x: 0, y: 0 };
             let historyItems = [];
             let imageIdCounter = Date.now();
+            let currentFileSize = 0;
+            let adjustments = { brightness: 100, contrast: 100, saturation: 100, rotation: 0 };
+            let wmPosition = 'center';
+            let batchWmPosition = 'se';
+
+            // Batch state
+            let batchItems = []; // {id, file, img, name, originalSize, processedBlob, processedSize, dataUrl}
+            let batchIdCounter = 1;
+            let batchDragSrcId = null;
 
             // DOM refs
             const canvas = document.getElementById('editorCanvas');
@@ -1038,6 +1776,10 @@
             const aspectToggle = document.getElementById('aspectToggle');
             const targetSizeKB = document.getElementById('targetSizeKB');
             const estimatedSize = document.getElementById('estimatedSize');
+            const cmpOrig = document.getElementById('cmpOrig');
+            const cmpNew = document.getElementById('cmpNew');
+            const cmpFill = document.getElementById('cmpFill');
+            const cmpSavings = document.getElementById('cmpSavings');
 
             // ============================================================
             // THEME
@@ -1111,6 +1853,8 @@
                         originalImage = img;
                         sourceAspect = img.width / img.height;
                         currentRatio = 'original';
+                        currentFileSize = file.size;
+                        resetAdjustments(true);
                         highlightRatio('original');
                         document.getElementById('fileName').textContent = file.name;
                         document.getElementById('fileSizeTag').textContent = formatBytes(file.size);
@@ -1213,6 +1957,7 @@
                 document.getElementById('fileDims').textContent = `${w} × ${h}`;
                 sourceAspect = (w / h) || 1;
                 updateCropOverlay();
+                debounceEstimateSize();
                 showToast(`Resized to ${w}×${h}`, 'success');
             };
 
@@ -1339,7 +2084,156 @@
                 document.getElementById('fileDims').textContent = `${Math.round(w)} × ${Math.round(h)}`;
                 sourceAspect = (w / h) || 1;
                 disableCropMode();
+                debounceEstimateSize();
                 showToast('Crop applied', 'success');
+            };
+
+            // ============================================================
+            // ADJUSTMENTS / FILTERS (live preview via CSS filter, baked on Apply)
+            // ============================================================
+            const adjBrightness = document.getElementById('adjBrightness');
+            const adjContrast = document.getElementById('adjContrast');
+            const adjSaturation = document.getElementById('adjSaturation');
+            const adjBrightnessVal = document.getElementById('adjBrightnessVal');
+            const adjContrastVal = document.getElementById('adjContrastVal');
+            const adjSaturationVal = document.getElementById('adjSaturationVal');
+
+            function livePreviewFilter() {
+                const b = adjBrightness.value, c = adjContrast.value, s = adjSaturation.value;
+                canvas.style.filter = `brightness(${b}%) contrast(${c}%) saturate(${s}%)`;
+            }
+            [
+                [adjBrightness, adjBrightnessVal],
+                [adjContrast, adjContrastVal],
+                [adjSaturation, adjSaturationVal]
+            ].forEach(([slider, label]) => {
+                slider.addEventListener('input', () => {
+                    label.textContent = slider.value + '%';
+                    livePreviewFilter();
+                });
+            });
+
+            window.applyAdjustments = function() {
+                if (!originalImage) { showToast('No image.', 'error'); return; }
+                const b = adjBrightness.value, c = adjContrast.value, s = adjSaturation.value;
+                if (b == 100 && c == 100 && s == 100) { showToast('No changes to apply.', 'error'); return; }
+                const temp = document.createElement('canvas');
+                temp.width = canvas.width;
+                temp.height = canvas.height;
+                const tctx = temp.getContext('2d');
+                tctx.filter = `brightness(${b}%) contrast(${c}%) saturate(${s}%)`;
+                tctx.drawImage(canvas, 0, 0);
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.filter = 'none';
+                ctx.drawImage(temp, 0, 0);
+                canvas.style.filter = 'none';
+                resetAdjustments();
+                debounceEstimateSize();
+                showToast('Adjustments applied', 'success');
+            };
+
+            window.resetAdjustments = function(silent) {
+                adjBrightness.value = 100;
+                adjContrast.value = 100;
+                adjSaturation.value = 100;
+                adjBrightnessVal.textContent = '100%';
+                adjContrastVal.textContent = '100%';
+                adjSaturationVal.textContent = '100%';
+                canvas.style.filter = 'none';
+                if (!silent) showToast('Adjustments reset', 'success');
+            };
+
+            window.rotateCanvas = function(deg) {
+                if (!originalImage) { showToast('No image.', 'error'); return; }
+                const temp = document.createElement('canvas');
+                temp.width = canvas.height;
+                temp.height = canvas.width;
+                const tctx = temp.getContext('2d');
+                tctx.translate(temp.width / 2, temp.height / 2);
+                tctx.rotate(deg * Math.PI / 180);
+                tctx.drawImage(canvas, -canvas.width / 2, -canvas.height / 2);
+                canvas.width = temp.width;
+                canvas.height = temp.height;
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.drawImage(temp, 0, 0);
+                widthInput.value = canvas.width;
+                heightInput.value = canvas.height;
+                document.getElementById('fileDims').textContent = `${canvas.width} × ${canvas.height}`;
+                sourceAspect = canvas.width / canvas.height;
+                updateCropOverlay();
+                debounceEstimateSize();
+                showToast('Rotated', 'success');
+            };
+
+            window.flipCanvas = function(axis) {
+                if (!originalImage) { showToast('No image.', 'error'); return; }
+                const temp = document.createElement('canvas');
+                temp.width = canvas.width;
+                temp.height = canvas.height;
+                const tctx = temp.getContext('2d');
+                if (axis === 'h') { tctx.translate(canvas.width, 0);
+                    tctx.scale(-1, 1); } else { tctx.translate(0, canvas.height);
+                    tctx.scale(1, -1); }
+                tctx.drawImage(canvas, 0, 0);
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.drawImage(temp, 0, 0);
+                debounceEstimateSize();
+                showToast(axis === 'h' ? 'Flipped horizontally' : 'Flipped vertically', 'success');
+            };
+
+            // ============================================================
+            // WATERMARK / TEXT OVERLAY
+            // ============================================================
+            const wmOpacitySlider = document.getElementById('wmOpacity');
+            const wmOpacityVal = document.getElementById('wmOpacityVal');
+            const wmSizeSlider = document.getElementById('wmSize');
+            const wmSizeVal = document.getElementById('wmSizeVal');
+            wmOpacitySlider.addEventListener('input', () => wmOpacityVal.textContent = wmOpacitySlider.value + '%');
+            wmSizeSlider.addEventListener('input', () => wmSizeVal.textContent = wmSizeSlider.value + 'px');
+            document.querySelectorAll('#wmPosGrid .wm-pos-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('#wmPosGrid .wm-pos-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    wmPosition = btn.dataset.pos;
+                });
+            });
+
+            function drawWatermarkOnCtx(targetCtx, w, h, text, color, opacityPct, fontSize, position) {
+                if (!text) return;
+                targetCtx.save();
+                targetCtx.globalAlpha = opacityPct / 100;
+                targetCtx.fillStyle = color;
+                targetCtx.font = `700 ${fontSize}px Inter, sans-serif`;
+                targetCtx.textBaseline = 'middle';
+                const metrics = targetCtx.measureText(text);
+                const tw = metrics.width, th = fontSize;
+                const pad = Math.max(10, fontSize * 0.5);
+                let x, y;
+                switch (position) {
+                    case 'nw': x = pad; y = pad + th / 2; targetCtx.textAlign = 'left'; break;
+                    case 'n': x = w / 2; y = pad + th / 2; targetCtx.textAlign = 'center'; break;
+                    case 'ne': x = w - pad; y = pad + th / 2; targetCtx.textAlign = 'right'; break;
+                    case 'w': x = pad; y = h / 2; targetCtx.textAlign = 'left'; break;
+                    case 'e': x = w - pad; y = h / 2; targetCtx.textAlign = 'right'; break;
+                    case 'sw': x = pad; y = h - pad - th / 2; targetCtx.textAlign = 'left'; break;
+                    case 's': x = w / 2; y = h - pad - th / 2; targetCtx.textAlign = 'center'; break;
+                    case 'se': x = w - pad; y = h - pad - th / 2; targetCtx.textAlign = 'right'; break;
+                    default: x = w / 2; y = h / 2; targetCtx.textAlign = 'center';
+                }
+                targetCtx.fillText(text, x, y);
+                targetCtx.restore();
+            }
+
+            window.applyWatermark = function() {
+                if (!originalImage) { showToast('No image.', 'error'); return; }
+                const text = document.getElementById('wmText').value.trim();
+                if (!text) { showToast('Enter watermark text first.', 'error'); return; }
+                const color = document.getElementById('wmColor').value;
+                const opacity = parseInt(wmOpacitySlider.value);
+                const fontSize = parseInt(wmSizeSlider.value);
+                drawWatermarkOnCtx(ctx, canvas.width, canvas.height, text, color, opacity, fontSize, wmPosition);
+                debounceEstimateSize();
+                showToast('Watermark applied', 'success');
             };
 
             // ============================================================
@@ -1369,7 +2263,24 @@
                 try {
                     const blob = await canvasToBlob(canvas, formatSelect.value, parseInt(qualitySlider.value) / 100);
                     estimatedSize.textContent = `Est. ${formatBytes(blob.size)}`;
+                    updateCompareBox(currentFileSize, blob.size);
                 } catch (e) { estimatedSize.textContent = 'Est. — KB'; }
+            }
+
+            function updateCompareBox(origSize, newSize) {
+                if (!origSize || !newSize) return;
+                cmpOrig.textContent = formatBytes(origSize);
+                cmpNew.textContent = formatBytes(newSize);
+                const pct = Math.min(100, (newSize / origSize) * 100);
+                cmpFill.style.width = pct + '%';
+                const diff = origSize - newSize;
+                if (diff > 0) {
+                    cmpSavings.textContent = `${Math.round((diff / origSize) * 100)}% smaller than the original`;
+                    cmpSavings.style.color = 'var(--success)';
+                } else {
+                    cmpSavings.textContent = `${Math.round((-diff / origSize) * 100)}% larger than the original`;
+                    cmpSavings.style.color = 'var(--danger)';
+                }
             }
 
             function canvasToBlob(canvas, type, quality) {
@@ -1546,6 +2457,357 @@
                 if (e.key === 'Escape' && cropMode) { e.preventDefault();
                     resetCrop(); }
             });
+
+            // ============================================================
+            // MODE SWITCH (Single Edit / Batch)
+            // ============================================================
+            window.switchMode = function(mode) {
+                const single = document.getElementById('singleMode');
+                const batch = document.getElementById('batchMode');
+                const tabSingle = document.getElementById('tabSingle');
+                const tabBatch = document.getElementById('tabBatch');
+                if (mode === 'batch') {
+                    single.classList.add('hidden');
+                    batch.classList.remove('hidden');
+                    tabBatch.classList.add('active');
+                    tabSingle.classList.remove('active');
+                } else {
+                    batch.classList.add('hidden');
+                    single.classList.remove('hidden');
+                    tabSingle.classList.add('active');
+                    tabBatch.classList.remove('active');
+                }
+            };
+
+            // ============================================================
+            // BATCH PROCESSING
+            // ============================================================
+            const batchDropzone = document.getElementById('batchDropzone');
+            const batchFileInput = document.getElementById('batchFileInput');
+            const batchList = document.getElementById('batchList');
+            const batchCount = document.getElementById('batchCount');
+            const batchDownloadBtn = document.getElementById('batchDownloadBtn');
+            const batchProgress = document.getElementById('batchProgress');
+            const batchProgressFill = document.getElementById('batchProgressFill');
+            const batchProgressLabel = document.getElementById('batchProgressLabel');
+            const batchQualitySlider = document.getElementById('batchQualitySlider');
+            const batchQualityValue = document.getElementById('batchQualityValue');
+            const batchAdjToggle = document.getElementById('batchAdjToggle');
+            const batchWmOpacitySlider = document.getElementById('batchWmOpacity');
+            const batchWmOpacityVal = document.getElementById('batchWmOpacityVal');
+            let useBatchAdjustments = false;
+
+            batchQualitySlider.addEventListener('input', () => batchQualityValue.textContent = batchQualitySlider
+                .value + '%');
+            batchWmOpacitySlider.addEventListener('input', () => batchWmOpacityVal.textContent = batchWmOpacitySlider
+                .value + '%');
+            document.querySelectorAll('#batchWmPosGrid .wm-pos-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('#batchWmPosGrid .wm-pos-btn').forEach(b => b.classList.remove(
+                        'active'));
+                    btn.classList.add('active');
+                    batchWmPosition = btn.dataset.pos;
+                });
+            });
+            window.toggleBatchAdjustments = function() {
+                useBatchAdjustments = !useBatchAdjustments;
+                batchAdjToggle.classList.toggle('active', useBatchAdjustments);
+            };
+
+            batchDropzone.addEventListener('dragover', e => { e.preventDefault();
+                batchDropzone.classList.add('dragover'); });
+            batchDropzone.addEventListener('dragleave', () => batchDropzone.classList.remove('dragover'));
+            batchDropzone.addEventListener('drop', e => {
+                e.preventDefault();
+                batchDropzone.classList.remove('dragover');
+                addBatchFiles(e.dataTransfer.files);
+            });
+
+            window.handleBatchFileSelect = function(e) {
+                addBatchFiles(e.target.files);
+                batchFileInput.value = '';
+            };
+
+            function addBatchFiles(fileList) {
+                const files = Array.from(fileList).filter(f => f.type.startsWith('image/'));
+                if (!files.length) { showToast('No valid images found.', 'error'); return; }
+                files.forEach(file => {
+                    if (file.size > 15 * 1024 * 1024) { showToast(`${file.name} exceeds 15 MB, skipped.`, 'error');
+                        return; }
+                    const reader = new FileReader();
+                    reader.onload = (ev) => {
+                        const img = new Image();
+                        img.onload = () => {
+                            batchItems.push({
+                                id: batchIdCounter++,
+                                file, img,
+                                name: file.name,
+                                originalSize: file.size,
+                                dataUrl: ev.target.result,
+                                processedBlob: null,
+                                processedSize: null
+                            });
+                            renderBatchList();
+                        };
+                        img.src = ev.target.result;
+                    };
+                    reader.readAsDataURL(file);
+                });
+                showToast(`${files.length} image(s) added`, 'success');
+            }
+
+            function renderBatchList() {
+                batchCount.textContent = `${batchItems.length} image${batchItems.length===1?'':'s'} queued`;
+                if (!batchItems.length) {
+                    batchList.innerHTML =
+                        '<div class="batch-empty">No images queued yet — add a few to get started. Drag cards to reorder.</div>';
+                    batchDownloadBtn.disabled = true;
+                    document.getElementById('batchCompareBox').style.display = 'none';
+                    return;
+                }
+                batchList.innerHTML = '';
+                batchItems.forEach((item, idx) => {
+                    const div = document.createElement('div');
+                    div.className = 'batch-item';
+                    div.draggable = true;
+                    div.dataset.id = item.id;
+                    const statusText = item.processedBlob ?
+                        `${formatBytes(item.processedSize)} <i class="fas fa-check-circle"></i>` :
+                        formatBytes(item.originalSize);
+                    div.innerHTML =
+                        `<span class="drag-handle"><i class="fas fa-grip-vertical"></i></span>
+                         <button class="bremove" onclick="removeBatchItem(${item.id})"><i class="fas fa-times"></i></button>
+                         <img class="thumb" src="${item.dataUrl}" alt="${item.name}" loading="lazy" />
+                         <div class="bname">${item.name}</div>
+                         <div class="bmeta ${item.processedBlob?'done':''}">${statusText}</div>
+                         <div class="reorder-btns">
+                            <button onclick="moveBatchItem(${item.id},-1)" ${idx===0?'disabled':''}><i class="fas fa-arrow-left"></i></button>
+                            <button onclick="moveBatchItem(${item.id},1)" ${idx===batchItems.length-1?'disabled':''}><i class="fas fa-arrow-right"></i></button>
+                         </div>`;
+                    attachBatchDragEvents(div);
+                    batchList.appendChild(div);
+                });
+            }
+
+            function attachBatchDragEvents(el) {
+                el.addEventListener('dragstart', () => {
+                    batchDragSrcId = parseInt(el.dataset.id);
+                    el.classList.add('dragging');
+                });
+                el.addEventListener('dragend', () => el.classList.remove('dragging'));
+                el.addEventListener('dragover', e => { e.preventDefault();
+                    el.classList.add('drag-over'); });
+                el.addEventListener('dragleave', () => el.classList.remove('drag-over'));
+                el.addEventListener('drop', e => {
+                    e.preventDefault();
+                    el.classList.remove('drag-over');
+                    const targetId = parseInt(el.dataset.id);
+                    if (batchDragSrcId === null || batchDragSrcId === targetId) return;
+                    const srcIdx = batchItems.findIndex(i => i.id === batchDragSrcId);
+                    const tgtIdx = batchItems.findIndex(i => i.id === targetId);
+                    const [moved] = batchItems.splice(srcIdx, 1);
+                    batchItems.splice(tgtIdx, 0, moved);
+                    batchDragSrcId = null;
+                    renderBatchList();
+                });
+            }
+
+            window.removeBatchItem = function(id) {
+                batchItems = batchItems.filter(i => i.id !== id);
+                renderBatchList();
+            };
+
+            window.moveBatchItem = function(id, dir) {
+                const idx = batchItems.findIndex(i => i.id === id);
+                const newIdx = idx + dir;
+                if (idx === -1 || newIdx < 0 || newIdx >= batchItems.length) return;
+                const [moved] = batchItems.splice(idx, 1);
+                batchItems.splice(newIdx, 0, moved);
+                renderBatchList();
+            };
+
+            window.clearBatch = function() {
+                batchItems = [];
+                renderBatchList();
+                document.getElementById('batchProgress').classList.remove('active');
+                showToast('Batch cleared', 'success');
+            };
+
+            function computeFitSize(iw, ih, maxW, maxH) {
+                let w = iw, h = ih;
+                const ratio = Math.min(maxW / iw, maxH / ih, 1);
+                w = Math.round(iw * ratio);
+                h = Math.round(ih * ratio);
+                return { w: Math.max(1, w), h: Math.max(1, h) };
+            }
+
+            window.processBatch = async function() {
+                if (!batchItems.length) { showToast('Add images first.', 'error'); return; }
+                const maxW = parseInt(document.getElementById('batchWidth').value) || 1600;
+                const maxH = parseInt(document.getElementById('batchHeight').value) || 1600;
+                const format = document.getElementById('batchFormatSelect').value;
+                const quality = parseInt(batchQualitySlider.value) / 100;
+                const wmText = document.getElementById('batchWmText').value.trim();
+                const wmColor = document.getElementById('batchWmColor').value;
+                const wmOpacity = parseInt(batchWmOpacitySlider.value);
+
+                batchProgress.classList.add('active');
+                let totalOrig = 0,
+                    totalNew = 0;
+
+                for (let i = 0; i < batchItems.length; i++) {
+                    const item = batchItems[i];
+                    batchProgressLabel.textContent = `Processing ${i + 1} of ${batchItems.length} — ${item.name}`;
+                    batchProgressFill.style.width = Math.round(((i) / batchItems.length) * 100) + '%';
+
+                    const { w, h } = computeFitSize(item.img.width, item.img.height, maxW, maxH);
+                    const bc = document.createElement('canvas');
+                    bc.width = w;
+                    bc.height = h;
+                    const bctx = bc.getContext('2d');
+                    if (useBatchAdjustments) {
+                        bctx.filter =
+                            `brightness(${adjBrightness.value}%) contrast(${adjContrast.value}%) saturate(${adjSaturation.value}%)`;
+                    }
+                    bctx.drawImage(item.img, 0, 0, w, h);
+                    bctx.filter = 'none';
+                    if (wmText) drawWatermarkOnCtx(bctx, w, h, wmText, wmColor, wmOpacity, Math.max(14, Math.round(
+                        w * 0.045)), batchWmPosition);
+
+                    const blob = await canvasToBlob(bc, format, quality);
+                    item.processedBlob = blob;
+                    item.processedSize = blob.size;
+                    totalOrig += item.originalSize;
+                    totalNew += blob.size;
+                    await new Promise(r => setTimeout(r, 0)); // yield to UI
+                }
+
+                batchProgressFill.style.width = '100%';
+                batchProgressLabel.textContent = `Done — ${batchItems.length} image(s) processed`;
+                setTimeout(() => batchProgress.classList.remove('active'), 1200);
+                renderBatchList();
+                batchDownloadBtn.disabled = false;
+
+                const cmpBox = document.getElementById('batchCompareBox');
+                cmpBox.style.display = 'block';
+                document.getElementById('batchCmpOrig').textContent = formatBytes(totalOrig);
+                document.getElementById('batchCmpNew').textContent = formatBytes(totalNew);
+                const pct = Math.min(100, (totalNew / totalOrig) * 100);
+                document.getElementById('batchCmpFill').style.width = pct + '%';
+                const diff = totalOrig - totalNew;
+                const savingsEl = document.getElementById('batchCmpSavings');
+                if (diff > 0) {
+                    savingsEl.textContent = `${Math.round((diff / totalOrig) * 100)}% smaller in total`;
+                    savingsEl.style.color = 'var(--success)';
+                } else {
+                    savingsEl.textContent = `${Math.round((-diff / totalOrig) * 100)}% larger in total`;
+                    savingsEl.style.color = 'var(--danger)';
+                }
+                showToast('Batch processing complete', 'success');
+            };
+
+            window.downloadBatchZip = async function() {
+                const ready = batchItems.filter(i => i.processedBlob);
+                if (!ready.length) { showToast('Process the batch first.', 'error'); return; }
+                const format = document.getElementById('batchFormatSelect').value;
+                const ext = getFileExtension(format);
+                if (typeof JSZip === 'undefined') {
+                    showToast('ZIP library unavailable — downloading files individually.', 'error');
+                    ready.forEach((item, idx) => setTimeout(() => {
+                        const a = document.createElement('a');
+                        a.href = URL.createObjectURL(item.processedBlob);
+                        a.download = `pixforme_${idx + 1}_${item.name.replace(/\.[^.]+$/, '')}.${ext}`;
+                        a.click();
+                    }, idx * 300));
+                    return;
+                }
+                showToast('Building ZIP…', 'success');
+                const zip = new JSZip();
+                ready.forEach((item, idx) => {
+                    const cleanName = item.name.replace(/\.[^.]+$/, '');
+                    zip.file(`${String(idx + 1).padStart(2,'0')}_${cleanName}.${ext}`, item.processedBlob);
+                });
+                const content = await zip.generateAsync({ type: 'blob' });
+                const url = URL.createObjectURL(content);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `pixforme_batch_${Date.now()}.zip`;
+                a.click();
+                URL.revokeObjectURL(url);
+                showToast('ZIP downloaded', 'success');
+            };
+
+            // ============================================================
+            // PWA — installable + offline app-shell caching
+            // ============================================================
+            (function setupPwa() {
+                const manifest = {
+                    name: 'PixForMe — Image Editor & Converter',
+                    short_name: 'PixForMe',
+                    description: 'Free, private, offline-capable image editor and converter.',
+                    start_url: window.location.href.split('#')[0],
+                    display: 'standalone',
+                    background_color: '#0b0f14',
+                    theme_color: '#5b8af5',
+                    icons: [{
+                        src: 'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'%3E%3Ccircle cx=\'50\' cy=\'50\' r=\'48\' fill=\'%235b8af5\'/%3E%3Ctext x=\'50\' y=\'68\' font-size=\'52\' font-family=\'Arial, sans-serif\' font-weight=\'700\' text-anchor=\'middle\' fill=\'white\'%3EP%3C/text%3E%3C/svg%3E',
+                        sizes: '192x192 512x512',
+                        type: 'image/svg+xml'
+                    }]
+                };
+                const manifestLink = document.getElementById('pwaManifest');
+                if (manifestLink) {
+                    manifestLink.setAttribute('href', 'data:application/manifest+json,' + encodeURIComponent(
+                        JSON.stringify(manifest)));
+                }
+
+                if ('serviceWorker' in navigator) {
+                    const swSource = `
+                        const CACHE = 'pixforme-shell-v1';
+                        self.addEventListener('install', (e) => {
+                            self.skipWaiting();
+                            e.waitUntil(caches.open(CACHE).then((c) => c.add(self.registration.scope)));
+                        });
+                        self.addEventListener('activate', (e) => self.clients.claim());
+                        self.addEventListener('fetch', (e) => {
+                            if (e.request.method !== 'GET') return;
+                            e.respondWith(
+                                caches.match(e.request).then((cached) => {
+                                    const network = fetch(e.request).then((res) => {
+                                        if (res && res.ok) caches.open(CACHE).then((c) => c.put(e.request, res.clone()));
+                                        return res;
+                                    }).catch(() => cached);
+                                    return cached || network;
+                                })
+                            );
+                        });
+                    `;
+                    try {
+                        const blob = new Blob([swSource], { type: 'application/javascript' });
+                        const swUrl = URL.createObjectURL(blob);
+                        navigator.serviceWorker.register(swUrl).catch(() => {});
+                    } catch (e) {}
+                }
+
+                let deferredPrompt = null;
+                window.addEventListener('beforeinstallprompt', (e) => {
+                    e.preventDefault();
+                    deferredPrompt = e;
+                    document.getElementById('installBtn').classList.remove('hidden');
+                });
+                window.installPwa = function() {
+                    if (!deferredPrompt) { showToast('Already installed or unsupported.', 'error'); return; }
+                    deferredPrompt.prompt();
+                    deferredPrompt.userChoice.then(() => {
+                        deferredPrompt = null;
+                        document.getElementById('installBtn').classList.add('hidden');
+                    });
+                };
+                window.addEventListener('appinstalled', () => {
+                    document.getElementById('installBtn').classList.add('hidden');
+                    showToast('App installed', 'success');
+                });
+            })();
 
             // ============================================================
             // INIT
